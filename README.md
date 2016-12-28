@@ -12,6 +12,7 @@
     cyarn/npm install
     npm run dev
     访问: http://localhost:8080/
+    
     ```
   * 使用基于webpack的完整模板创建项目: webpack_demo
     ```sh
@@ -20,6 +21,7 @@
     cyarn/npm install
     npm run dev
     访问: http://localhost:8080/
+    
     ```
 
 ## ESLint
