@@ -56,6 +56,7 @@
       el: 'body',
       components: { App }
     })
+    
     ```
 	* .eslintignore: 指令检查忽略的文件,　可以在此添加想忽略的文件
     ```
@@ -71,6 +72,7 @@
     <template>
       页面模板
     </template>
+    
     ```
   * JS默认模块对象: 
     ```
@@ -82,12 +84,14 @@
         components: {}
       }
     </script>
+    
     ```
   * 页面样式: 
     ```
     <style scoped>
       样式定义
     </style>
+    
     ```
 * 基本使用
   在父组件对象的components属性中配置组件模块对象
@@ -103,6 +107,7 @@
       }
     }
   </script>
+  
   ```
 * 关于标签名与标签属性名书写问题:
   * 标签名与标签属性名不区分大小写
@@ -122,4 +127,5 @@
         age: {type: Number},
         setNmae: {type: Function}
       }
+      
       ```
