@@ -129,6 +129,7 @@
       }
       
       ```
+
 ## vue-resource插件使用
 * 说明:
   * vue-resource是非官方提供的ajax插件, 受众广
