@@ -2,8 +2,8 @@
 * **vue-cli插件使用**
 * **vue-reource插件使用**
 * **vue-router插件使用**
-* 关于ESLint工具
 * **vue组件化**
+* 关于ESLint工具
 
 ## vue-cli
 * 说明:
