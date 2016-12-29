@@ -3,6 +3,7 @@
 * **vue-reource插件使用**
 * **vue-router插件使用**
 * **vue组件化**
+* **Todo-List 应用**
 * 关于ESLint工具
 
 ## vue-cli
