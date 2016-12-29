@@ -169,10 +169,12 @@
         component: news
       }
     }
+   
     ```
   * 路由路径
     ```
     <a v-link="{path: '/home/news'}">News</a>
+   
     ```
 * 路由请求携带参数
   * 配置路由
@@ -182,20 +184,24 @@
         component: messageDetail
       }
     }
+    
     ```
   * 路由路径
     ```
     <a v-link="{path: '/home/message/mdetail/2'}">{{m.title}}</a>
+   
     ```
   * 路由组件中读取请求参数
     ```
     {{$route.params.id}}
+    
     ```
 * <route-view>使用
   * 参数keep-alive属性实现路由界面的缓存
   * 通过标签属性可动态向路由组件内部传递数据
     ```
     <router-view keep-alive :msg="msg"></router-view>
+    
     ```
 ## vue组件
 * 一个.vue文件就是一个vue组件
@@ -205,6 +211,7 @@
     <template>
       页面模板
     </template>
+   
     ```
   * JS默认模块对象: 
     ```
@@ -216,12 +223,14 @@
         components: {}
       }
     </script>
+    
     ```
   * 页面样式: 
     ```
     <style scoped>
       样式定义
     </style>
+    
     ```
 * 基本使用
   在父组件对象的components属性中配置组件模块对象
@@ -237,6 +246,7 @@
       }
     }
   </script>
+  
   ```
 * 关于标签名与标签属性名书写问题:
   * 标签名与标签属性名不区分大小写
@@ -257,6 +267,7 @@
         age: {type: Number},
         setNmae: {type: Function}
       }
+     
       ```
 * 组件间通信
   * 尽量通过props的方式实现组件间通信
@@ -268,6 +279,7 @@
         this.$on('delete_todo', function (todo) {
           this.deleteTodo(todo)
         })
+       
         ```
       * 方式二: 通过events选项
         ```
@@ -276,16 +288,19 @@
             this.deleteTodo(todo)
           }
         },
+        
         ```
       * 方式三: 通过v-on绑定
         ```
         @delete_todo="deleteTodo"
+       
         ```
     * 触发事件(3种情况)
       ```
       this.$emit(eventName, data): 在当前组件触发事件
       this.$dispatch(eventName, data): 分给父辈组件(冒泡)
       this.$broadcast(eventName, data): 广播给后代组件
+      
       ```
 
 ## 关于ESLint
