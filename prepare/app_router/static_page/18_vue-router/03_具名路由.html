@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css"/>
+		<link rel="stylesheet" href="assets/css/custom.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="row">
+				<div class="col-xs-offset-2 col-xs-8">
+					<div class="page-header">
+						<h2>Router Basic - 01</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!--左侧-->
+				<div class="col-xs-2 col-xs-offset-2">
+					<div class="list-group">
+						<!--使用指令v-link进行导航-->
+						<a class="list-group-item" v-link="{path:'/home'}">Home</a>
+						<a class="list-group-item" v-link="{path:'/about'}">About</a>
+					</div>
+				</div>
+				<!--右侧-->
+				<div class="col-xs-6">
+					<div class="panel">
+						<div class="panel-body">
+							<!--用于渲染匹配的组件-->
+							<router-view></router-view>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<template id="home">
+			<div>
+				<h1>Home</h1>
+				<p>{{msg}}</p>
+			</div>
+
+			<div>
+				<ul class="nav nav-tabs">
+					<li>
+						<!--<a v-link="{path : '/home/news'}">News</a>-->
+						<a v-link="{name : 'news'}">News</a>
+					</li>
+					<li>
+						<a v-link="{path : '/home/message'}">Message</a>
+					</li>
+				</ul>
+				<router-view></router-view>
+			</div>
+		</template>
+
+		<template id="news">
+			<ul>
+				<li>
+					<a v-link="{path:'/home/news/detail/01'}">News 01</a>
+				</li>
+				<li>
+					<a v-link="{path:'/home/news/detail/02'}">News 01</a>
+				</li>
+				<li>
+					<a v-link="{ name: 'detail', params: {id: '03'} }">News 01</a>
+				</li>
+			</ul>
+			<router-view></router-view>
+		</template>
+
+		<template id="newsDetail">
+			News detail....{{$route.params.id}}
+		</template>
+
+		<template id="message">
+			<ul>
+				<li>Message 01</li>
+				<li>Message 02</li>
+				<li>Message 03</li>
+			</ul>
+		</template>
+
+		<template id="about">
+			<div>
+				<h1>About</h1>
+				<p>This is the tutorial about vue-router.</p>
+			</div>
+		</template>
+
+<!--
+具名路由: 给包含多个层级的路由指定name, 在v-link引用时指定name即可, 编写更简洁
+参数数据传递:
+	页面模板路径: v-link={path:'/home/news/detail/2'}
+	路由定义: '/detail/:id'
+	页面模板显示: {{$route.params.id}}
+-->
+		<script src="assets/js/vue.js"></script>
+		<script src="assets/js/vue-router.js"></script>
+		<script>
+			//1. 创建路由对应的组件组件
+			var Home = Vue.extend({
+				template : '#home',
+				data : function () {
+				    return {
+				    	msg : 'Hello, vue router!'
+					}
+				}
+			});
+
+			var News = Vue.extend({
+				template : '#news'
+			});
+
+			var Detail = Vue.extend({
+				template : '#newsDetail'
+			})
+
+			var Message = Vue.extend({
+				template : '#message'
+			});
+
+			var About = Vue.extend({
+				template: '#about'
+			});
+
+			//2. 创建Router
+			var router = new VueRouter();
+
+			//3. 映射路由
+			router.map({
+				'/home' : {
+					component : Home,
+					//定义子路由
+					subRoutes : {
+						'/news' : {
+							name : 'news',
+							component : News,
+							//子路由
+							subRoutes : {
+								'/detail/:id' : {
+									name : 'detail',
+									component : Detail
+								}
+							}
+						},
+						'/message' : {
+							component : Message
+						}
+					}
+				},
+				'/about' : {component : About}
+			});
+
+			//6. 重定向默认路径
+			router.redirect({
+				'/' : '/home'
+			})
+
+			//7. 启动路由
+				//创建根组件
+			var App = Vue.extend({});
+				//启动路由
+			router.start(App, '#app');
+		</script>
+	</body>
+</html>

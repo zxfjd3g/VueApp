@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css"/>
+		<link rel="stylesheet" href="assets/css/custom.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="row">
+				<div class="col-xs-offset-2 col-xs-8">
+					<div class="page-header">
+						<h2>Router Basic - 01</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-2 col-xs-offset-2">
+					<div class="list-group">
+						<!--使用指令v-link进行导航-->
+						<a class="list-group-item" v-link="{path:'/home'}">Home</a>
+						<a class="list-group-item" v-link="{path:'/about'}">About</a>
+					</div>
+				</div>
+
+				<div class="col-xs-6">
+					<div class="panel">
+						<div class="panel-body">
+							<!--用于渲染匹配的组件-->
+							<router-view></router-view>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<template id="home">
+			<div>
+				<h1>Home</h1>
+				<p>{{msg}}</p>
+			</div>
+		</template>
+
+		<template id="about">
+			<div>
+				<h1>About</h1>
+				<p>This is the tutorial about vue-router.</p>
+			</div>
+		</template>
+<!--
+0. 说明 :
+	路由与组件的对应关系:
+		/home -----Home
+		/about ----About
+1. 定义路由对应的组件,并定义模板<template>
+	var MyComp = Vue.extend({template : '#home'})
+	<template id='home'>
+		<div>xxx</div>
+	</template>
+2. 创建VueRouter对象
+	var router = new VueRouter()
+3. 映射路由
+	router.map({ 'path1' : {component : MyComp} });
+4. 使用v-link指令
+	v-link={path : '/xxx'}
+5. 使用<router-view>标签
+	<router-view/>
+6. 重定向默认路径
+	router.redirect({'/' : '/xxx'});
+7. 启动路由
+	var App = Vue.extend({});
+	router.start(App, '#app');
+-->
+		<script src="assets/js/vue.js"></script>
+		<script src="assets/js/vue-router.js"></script>
+		<script>
+			//1. 创建路由对应的组件组件, 并定义模板<template>
+			var Home = Vue.extend({
+				template : '#home',
+				data : function () {
+				    return {
+				    	msg : 'Hello, vue router!'
+					}
+				}
+			});
+			var About = Vue.extend({
+				template: '#about'
+			});
+
+			//2. 创建Router
+			var router = new VueRouter();
+
+			//3. 映射路由
+			router.map({
+				'/home' : {component : Home},
+				'/about' : {component : About}
+			});
+
+
+			//7. 启动路由
+				//创建根组件
+			var App = Vue.extend({});
+				//启动路由
+			router.start(App, '#app');
+
+			router.go('/home')
+
+		</script>
+	</body>
+</html>

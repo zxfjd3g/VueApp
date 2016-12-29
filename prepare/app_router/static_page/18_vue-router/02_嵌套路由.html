@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css"/>
+		<link rel="stylesheet" href="assets/css/custom.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="row">
+				<div class="col-xs-offset-2 col-xs-8">
+					<div class="page-header">
+						<h2>Router Basic - 01</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!--左侧-->
+				<div class="col-xs-2 col-xs-offset-2">
+					<div class="list-group">
+						<!--使用指令v-link进行导航-->
+						<a class="list-group-item" v-link="{path:'/home'}">Home</a>
+						<a class="list-group-item" v-link="{path:'/about'}">About</a>
+					</div>
+				</div>
+				<!--右侧-->
+				<div class="col-xs-6">
+					<div class="panel">
+						<div class="panel-body">
+							<!--用于渲染匹配的组件-->
+							<router-view></router-view>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<template id="home">
+			<div>
+				<h1>Home</h1>
+				<p>{{msg}}</p>
+			</div>
+
+			<div>
+				<ul class="nav nav-tabs">
+					<li>
+						<a v-link="{path : '/home/news'}">News</a>
+					</li>
+					<li>
+						<a v-link="{path : '/home/message'}">Message</a>
+					</li>
+				</ul>
+				<router-view></router-view>
+			</div>
+		</template>
+
+		<template id="news">
+			<ul>
+				<li>News 01</li>
+				<li>News 02</li>
+				<li>News 03</li>
+			</ul>
+		</template>
+
+		<template id="message">
+			<ul>
+				<li>Message 01</li>
+				<li>Message 02</li>
+				<li>Message 03</li>
+			</ul>
+		</template>
+
+		<template id="about">
+			<div>
+				<h1>About</h1>
+				<p>This is the tutorial about vue-router.</p>
+			</div>
+		</template>
+
+<!--
+1. 嵌套路由: 在一个路由中又包含了子路由
+2. 实现嵌套路由有两个要点:
+	1). 在组件的模板标签中, 使用v-link指令和<router-view>标签
+	2). 在路由定义的内部, 定义子路由(subRoutes)
+-->
+		<script src="assets/js/vue.js"></script>
+		<script src="assets/js/vue-router.js"></script>
+		<script>
+			//1. 创建路由对应的组件组件
+			var Home = Vue.extend({
+				template : '#home',
+				data : function () {
+				    return {
+				    	msg : 'Hello, vue router!'
+					}
+				}
+			});
+
+			var News = Vue.extend({
+				template : '#news'
+			});
+
+			var Message = Vue.extend({
+				template : '#message'
+			});
+
+			var About = Vue.extend({
+				template: '#about'
+			});
+
+			//2. 创建Router
+			var router = new VueRouter();
+
+			//3. 映射路由
+			router.map({
+				'/home' : {
+					component : Home,
+					//定义子路由
+					subRoutes : {
+						'/news' : {
+							component : News
+						},
+						'/message' : {
+							component : Message
+						}
+					}
+				},
+				'/about' : {component : About}
+			});
+
+			//6. 重定向默认路径
+			router.redirect({
+				'/' : '/home'
+			})
+
+			//7. 启动路由
+				//创建根组件
+			var App = Vue.extend({});
+				//启动路由
+			router.start(App, '#app');
+		</script>
+	</body>
+</html>

@@ -81,5 +81,49 @@
     ```
   * 详细用法: 查看在线文档
     
-    
-    
+## vue-router
+* 说明
+  * 官方提供的用来实现SPA的插件
+  * github: https://github.com/vuejs/vue-router
+  * 对应vue1.x的版本为: 0.7.13
+* 下载和引入
+  ```
+  npm install vue-router@0.7.13 --save
+  import VueRouter from 'vue-router'
+  ```
+* 相关API说明
+  * VueRouter(): 构建函数, 用来创建路由器对象
+    * 配置: 在创建对象时可以指定一个配置对象
+      ```
+      new VueRouter({
+        linkActiveClass: 'active', //指定当前路由链接的样式名
+        history: true //去掉#!
+      })
+      ```
+    * map(): 映射路由
+      ```
+      router.map({
+          '/about': {
+            component: About
+          },
+          '/home': {
+            component: Home
+          }
+        })
+      ```
+    * start(): 启动应用
+      ```
+      router.start(App, '#app')
+      ```
+    * go(): 请求指定路由
+      ```
+      router.go('/about')
+      ```
+  * 指令与组件:
+    * v-link: 用来指定路由路径, 如: v-link='{path:"/about"}'
+    * <router-view>: 用来显示当前路由组件界面
+* 实现简单路由
+  * 路由模块: home.vue
+* 实现嵌套路由
+
+* 路由请求携带数据
