@@ -18,5 +18,5 @@ configRoute(router)
 //启动应用
 router.start(app, '#app')
 
-//默认请求一个路由
+//初始请求一个路由
 router.go('/about')

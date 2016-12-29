@@ -21,7 +21,7 @@
         <div class="panel">
           <div class="panel-body">
             <!--用于渲染匹配的组件-->
-            <router-view keep-alive></router-view>
+            <router-view keep-alive :prop-name="name"></router-view>
           </div>
         </div>
       </div>
@@ -32,7 +32,11 @@
 <script>
 
   export default {
-
+    data () {
+      return {
+        name: 'atguigu'
+      }
+    }
   }
 </script>
 

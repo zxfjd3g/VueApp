@@ -21,7 +21,7 @@
     npm run dev
     访问: http://localhost:8080/
     ```
-## ESLint
+## 关于ESLint
 * 说明
   * ESLint是一个代码规范检查工具
   * 官网: http://eslint.org/
@@ -120,10 +120,88 @@
       router.go('/about')
       ```
   * 指令与组件:
-    * v-link: 用来指定路由路径, 如: v-link='{path:"/about"}'
+    * v-link: 用来指定路由路径
+      ```
+      <a v-link='{path:"/about"}'>About</a>
+      ```
     * <router-view>: 用来显示当前路由组件界面
+      ```
+      <router-view></router-view>
+      ```
 * 实现简单路由
-  * 路由模块: home.vue
+  * 路由组件:
+    * home.vue
+    * about.vue
+  * 应用组件: App.vue
+    ```
+    <div>
+      <!--路由链接-->
+      <a v-link="{path:'/about'}">About</a>
+      <a v-link="{path:'/home'}">Home</a>
+      <!--用于渲染当前路由组件-->
+      <router-view keep-alive></router-view>  
+    </div>
+    ```
+  * 入口js: main.js
+    ```
+    import Vue from 'vue'
+    import VueRouter from 'vue-router'
+    import app from './components/app.vue'
+    
+    //使用插件
+    Vue.use(VueRouter)
+    
+    //创建用来映射路由的路由器对象
+    const router = new VueRouter({
+      linkActiveClass: 'active', //指定当前路由链接的样式名
+      history: true //去掉#!
+    })
+    
+    //配置路由
+    router.map({
+      '/about': {component: about},
+      '/home': {component: home}
+    })
+    
+    //启动应用
+    router.start(app, '#app')
+    
+    //初始请求一个路由
+    router.go('/about')
+    ```
 * 实现嵌套路由
-
-* 路由请求携带数据
+  * 配置嵌套路由
+    ```
+    subRoutes: {
+      '/news': {
+        component: news
+      }
+    }
+    ```
+  * 路由路径
+    ```
+    <a v-link="{path: '/home/news'}">News</a>
+    ```
+* 路由请求携带参数
+  * 配置路由
+    ```
+    subRoutes: {
+      '/mdetail/:id': {
+        component: messageDetail
+      }
+    }
+    ```
+  * 路由路径
+    ```
+    <a v-link="{path: '/home/message/mdetail/2'}">{{m.title}}</a>
+    ```
+  * 路由组件中读取请求参数
+    ```
+    {{$route.params.id}}
+    ```
+* <route-view>使用
+  * 参数keep-alive属性实现路由界面的缓存
+  * 通过标签属性可动态向路由组件内部传递数据
+    ```
+    <router-view keep-alive :msg="msg"></router-view>
+    ```
