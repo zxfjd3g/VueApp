@@ -1,3 +1,10 @@
+## 主要包含以下主题
+* **vue-cli插件使用**
+* **vue-reource插件使用**
+* **vue-router插件使用**
+* 关于ESLint工具
+* **vue组件化**
+
 ## vue-cli
 * 说明:
   * vue-cli是vue官方提供的脚手架工具包
