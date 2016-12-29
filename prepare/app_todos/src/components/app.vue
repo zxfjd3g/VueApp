@@ -2,8 +2,9 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <todo-header :add-todo="addTodo"></todo-header>
-      <todo-main :todos="todos"></todo-main>
-      <todo-footer :todos="todos" :update-todos="updateTodos" :delete-done="deleteDone"></todo-footer>
+      <todo-main :todos="todos" @delete_todo="deleteTodo"></todo-main>
+      <todo-footer :todos="todos" :update-todos="updateTodos"
+           :delete-done="deleteDone"></todo-footer>
     </div>
   </div>
 </template>
@@ -25,9 +26,9 @@
       // this.todos = [{isDone: false, title: '吃饭'}, {isDone: true, title: '睡觉'}]
       this.todos = storageUtil.fetch()
       // 绑定自定义监听
-      this.$on('delete_todo', function (todo) {
+      /*this.$on('delete_todo', function (todo) {
         this.deleteTodo(todo)
-      })
+      })*/
     },
 
     methods: {
@@ -54,6 +55,12 @@
         handler: storageUtil.save,
         deep: true
       }
+    },
+
+    events: { //自定义事件监听
+      /*'delete_todo': function (todo) {
+        this.deleteTodo(todo)
+      }*/
     },
 
     components: {todoHeader, todoMain, todoFooter}
