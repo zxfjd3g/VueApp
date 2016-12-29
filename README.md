@@ -20,6 +20,7 @@
     cyarn/npm install
     npm run dev
     访问: http://localhost:8080/
+    
     ```
   * 使用基于webpack的完整模板创建项目: webpack_demo
     ```
@@ -28,6 +29,7 @@
     cyarn/npm install
     npm run dev
     访问: http://localhost:8080/
+    
     ```
 
 ## vue-resource插件使用
@@ -54,16 +56,14 @@
       // error callback
       console.log(response.statusText) //错误信息
     });
-    
-    // 发送post请求
-    
-    
+
     ```
   * 详细用法(查看在线文档)
     ```
     Vue.http.get('/someUrl', [options]).then(successCallback, errorCallback);
     Vue.http.post('/someUrl', [body], [options]).then(successCallback, errorCallback);
     Vue.http.json('/someUrl', [options]).then(successCallback, errorCallback);
+   
     ```
     
 ## vue-router插件使用
@@ -75,6 +75,7 @@
   ```
   npm install vue-router@0.7.13 --save
   import VueRouter from 'vue-router'
+ 
   ```
 * 相关API说明
   * VueRouter(): 构建函数, 用来创建路由器对象
@@ -84,6 +85,7 @@
         linkActiveClass: 'active', //指定当前路由链接的样式名
         history: true //去掉#!
       })
+     
       ```
     * map(): 映射路由
       ```
@@ -95,14 +97,17 @@
             component: Home
           }
         })
+      
       ```
     * start(): 启动应用
       ```
       router.start(App, '#app')
+     
       ```
     * go(): 请求指定路由
       ```
       router.go('/about')
+     
       ```
   * 指令与组件:
     * v-link: 用来指定路由路径
@@ -126,6 +131,7 @@
       <!--用于渲染当前路由组件-->
       <router-view keep-alive></router-view>  
     </div>
+   
     ```
   * 入口js: main.js
     ```
@@ -153,6 +159,7 @@
     
     //初始请求一个路由
     router.go('/about')
+  
     ```
 * 实现嵌套路由
   * 配置嵌套路由
