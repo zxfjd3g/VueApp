@@ -3,7 +3,7 @@
     <div class="todo-wrap">
       <todo-header :todos="todos"></todo-header>
       <todo-main :todos="todos" :delete-todo="deleteTodo"></todo-main>
-      <todo-footer></todo-footer>
+      <todo-footer :todos="todos" :delete-dones="deleteDones" :update-todos="updateTodos"></todo-footer>
     </div>
   </div>
 </template>
@@ -12,18 +12,37 @@
   import todoHeader from './todoHeader'
   import todoMain from './todoMain'
   import todoFooter from './todoFooter'
+  import todoStorage from '../util/todoStorage'
 
   export default {
 
     data () {
       return {
-        todos: [{isDone: false, title: '吃饭3'}, {isDone: true, title: '睡觉3'}]
+        // todos: [{isDone: false, title: '吃饭3'}, {isDone: true, title: '睡觉3'}]
+        todos: []
       }
+    },
+
+    created () {
+      // 模拟异步请求获取数据
+      this.todos = todoStorage.get()  // 读取保存的todos
     },
 
     methods: {
       deleteTodo (todo) {
         this.todos.$remove(todo)
+      },
+      updateTodos (isDone) {
+        this.todos.forEach(todo => { todo.isDone = isDone })
+      },
+      deleteDones () {
+        this.todos = this.todos.filter(todo => !todo.isDone)
+      }
+    },
+    watch: {
+      'todos': {
+        handler: todoStorage.set,  // 当todos有任何变化就会调用-->保存todos
+        deep: true
       }
     },
     components: {todoHeader, todoMain, todoFooter}
