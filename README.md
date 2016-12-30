@@ -298,7 +298,7 @@
     * 触发事件(3种情况)
       ```
       this.$emit(eventName, data): 在当前组件触发事件
-      this.$dispatch(eventName, data): 分给父辈组件(冒泡)
+      this.$dispatch(eventName, data): 分发给父辈组件(冒泡)
       this.$broadcast(eventName, data): 广播给后代组件
       
       ```
