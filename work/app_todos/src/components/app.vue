@@ -2,7 +2,7 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <todo-header :todos="todos"></todo-header>
-      <todo-main :todos="todos" :delete-todo="deleteTodo"></todo-main>
+      <todo-main :todos="todos" :delete-todo="deleteTodo" @delete="deleteTodo"></todo-main>
       <todo-footer :todos="todos" :delete-dones="deleteDones" :update-todos="updateTodos"></todo-footer>
     </div>
   </div>
@@ -26,6 +26,11 @@
     created () {
       // 模拟异步请求获取数据
       this.todos = todoStorage.get()  // 读取保存的todos
+
+      // 绑定自定义事件监听
+      /*this.$on('delete', function (todo) {
+        this.deleteTodo(todo)
+      })*/
     },
 
     methods: {
@@ -45,6 +50,12 @@
         deep: true
       }
     },
+    events: {
+      /*delete (todo) {
+        this.deleteTodo(todo)
+      }*/
+    },
+
     components: {todoHeader, todoMain, todoFooter}
   }
 </script>

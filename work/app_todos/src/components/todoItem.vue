@@ -5,6 +5,7 @@
       <span>{{todo.title}}</span>
     </label>
     <button class="btn btn-danger" v-show="isShown" @click="deleteItem">删除</button>
+    <button class="btn btn-danger" v-show="isShown" @click="deleteItem2">删除2</button>
   </li>
 </template>
 
@@ -34,6 +35,10 @@
         if (confirm(`确定删除${todo.title}吗?`)) {
           deleteTodo(todo)
         }
+      },
+      deleteItem2 () {
+        // 删除当前todo: 触发删除todo的事件
+        this.$dispatch('delete', this.todo)
       }
     }
   }
