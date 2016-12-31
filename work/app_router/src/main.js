@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import app from './components/app'
 import about from './components/about'
 import home from './components/home'
+import message from './components/message'
+import news from './components/news'
+import messageDetail from './components/messageDetail'
 
 //声明使用插件
 Vue.use(VueRouter)
@@ -15,7 +18,18 @@ const router = new VueRouter({
 //映射路由
 router.map({
   '/about': {component: about},
-  '/home': {component: home}
+  '/home': {
+    component: home,
+    subRoutes: {
+      '/news': {component: news},
+      '/message': {
+        component: message,
+        subRoutes: {
+          '/mdetail/:id': {component: messageDetail}
+        }
+      }
+    }
+  }
 })
 //启动应用
 router.start(app, '#routerTest')

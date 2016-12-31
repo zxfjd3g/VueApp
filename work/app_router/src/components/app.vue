@@ -20,7 +20,7 @@
         <div class="panel">
           <div class="panel-body">
             <!--用于渲染匹配的组件-->
-            <router-view></router-view>
+            <router-view keep-alive :msg="'xfzhang'"></router-view>
           </div>
         </div>
       </div>
